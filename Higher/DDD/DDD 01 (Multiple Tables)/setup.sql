@@ -1,0 +1,57 @@
+-- print output in columns
+.mode column
+
+-- create tables
+CREATE TABLE owners (
+  owner_id   INTEGER PRIMARY KEY,
+  first_name VARCHAR(20),
+  surname    VARCHAR(30),
+  address    VARCHAR(50),
+  town       VARCHAR(20),
+  telephone  VARCHAR(11)
+);
+
+CREATE TABLE pets (
+  pet_code VARCHAR(5) PRIMARY KEY,
+  pet_name VARCHAR(20),
+  type     VARCHAR(30),
+  dob      DATE,
+  vacc     BOOLEAN,
+  owner_id INTEGER NOT NULL,
+  vet_id   INTEGER NOT NULL,
+  
+  FOREIGN KEY (owner_id) REFERENCES owners(owner_id)
+  FOREIGN KEY (vet_id) REFERENCES vets(vet_id)
+);
+
+CREATE TABLE vets (
+  vet_id       INTEGER NOT NULL PRIMARY KEY,
+  first_name   VARCHAR(20),
+  surname      VARCHAR(30),
+  expert       VARCHAR(50)  
+);
+
+-- add data
+INSERT INTO owners VALUES (1277, 'Hardeep', 'Singh', '65 Iona Way', 'Greenock', '01475255707');
+INSERT INTO owners VALUES (2356, 'Sally', 'Chan', '142 Main Street', 'Greenock', '01475242499');
+INSERT INTO owners VALUES (3510, 'Elaine', 'Bryce', '29 Clyde Drive', 'Gourock', '01475636321');
+INSERT INTO owners VALUES (3821, 'Cameron', 'Gray', '17 Shuttle Street', 'Gourock', '01475312245');
+INSERT INTO owners VALUES (1053, 'Mark', 'Trench', '11 Coat Lane', 'Alloa', '01259111111');
+INSERT INTO owners VALUES (1981, 'Shona', 'Bonehilda', '37 Cycle Path', 'Stirling', '01786222222');
+INSERT INTO owners VALUES (2461, 'Glenda', 'Huntington', '101 Wetware Way', 'California', '01324000000');
+
+INSERT INTO pets VALUES ('P0123', 'Misty', 'Cat', '2012-04-23', 'True', 2356, 002);
+INSERT INTO pets VALUES ('P0345', 'Rover', 'Dog', '2010-12-12', 'True', 3821,003);
+INSERT INTO pets VALUES ('P0887', 'Foggy', 'Cat', '2012-01-23', 'True', 1277, 001);
+INSERT INTO pets VALUES ('P1559', 'Gladys', 'Gerbil', '2010-04-16', 'False', 1277, 004);
+INSERT INTO pets VALUES ('P1985', 'Slinky', 'Tortoise', '2016-09-24', 'False', 3510, 002);
+INSERT INTO pets VALUES ('P2233', 'Speedy', 'Tortoise', '2013-06-09', 'True', 1277, 004);
+INSERT INTO pets VALUES ('P1996', 'Jezza', 'Rat', '2022-11-02', 'True', 1053, 004);
+INSERT INTO pets VALUES ('P2458', 'Skelly', 'Iguana', '2012-11-11', 'False', 1981, 002);
+INSERT INTO pets VALUES ('P2154', 'Frank', 'Goldfish', '2010-01-01', 'True', 1053, 003);
+INSERT INTO pets VALUES ('P4512', 'Murrell', 'Snake', '1996-04-16', 'False', 2461, 001);
+
+INSERT INTO vets VALUES (001, 'Rhonda', 'Moretto', 'Dentistry');
+INSERT INTO vets VALUES (002, 'Paul', 'Jones', 'Dermatology');
+INSERT INTO vets VALUES (003, 'Amelia', 'Laing', 'Behavioural');
+INSERT INTO vets VALUES (004, 'Walter', 'Nielssen', 'Anesthesia');
